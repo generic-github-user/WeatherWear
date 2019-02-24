@@ -45,6 +45,17 @@ function displaySnackbar(data) {
       snackbar[0].MaterialSnackbar.showSnackbar(data);
 }
 
+function resetFields(ids) {
+      ids.forEach(
+            (id) => {
+                  var field = $("#" + id);
+                  field.val('');
+                  field.parent().removeClass("is-dirty");
+                  console.log(field[0])
+            }
+      );
+}
+
 // Undo a clothing deletion
 function undoDelete(event) {
       const ref = database.ref('users/' + uid + '/clothing/' + undoBuffer.id);
@@ -143,7 +154,14 @@ $(document).ready(
             var dialog = $('#add-clothing-dialog');
 
             function addClothing() {
-                  dialog[0].showModal()
+                  $('#upload').replaceWith($('#upload').val('').clone(true));
+                  // resetFields(['clothing-name', 'formality', 'type', 'temperature']);
+                  resetFields(['clothing-name']);
+                  // dialog.find('.getmdl-select').remove();
+                  // $.get("./dropdowns.html", function(html) {
+                  //       dialog.find('.mdl-dialog__content').append(html);
+                  // });
+                  dialog[0].showModal();
             }
 
             $('#add-clothing').click(addClothing);
@@ -211,11 +229,6 @@ $(document).ready(
                   // }
 
                   if (!friends) {
-                        friendsRef.set({
-                              0: 0
-                        })
-                  }
-                  if (!friends['0']) {
                         const msg = noFriendsMsgs[Math.floor(Math.random() * noFriendsMsgs.length)];
                         $('#friends').append('<p id="noFriends">' + msg + '</p>')
                   }
@@ -315,5 +328,7 @@ $(document).ready(
             $('#formality-filter').change(updateToday);
             $('#type-filter').change(updateToday);
             updateToday();
+
+            $('#banner-ad').attr('src', './media/ads/' + Math.ceil(Math.random() * 5) + '.jpg')
       }
 )
