@@ -4,6 +4,10 @@ html, body {
       background-color: #e2eeffff;
 }
 
+::-webkit-scrollbar {
+      display: none;
+}
+
 .warning {
       color: #c10000;
 }
@@ -60,6 +64,11 @@ h3 {
 
 #suggestions-list .clothing-tile button {
       visibility: hidden;
+}
+
+#noFriends {
+      margin-top: 200px;
+      text-align: center;
 }
 
 .no-select {
